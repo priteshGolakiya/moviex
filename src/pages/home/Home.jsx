@@ -1,17 +1,19 @@
 import "./style.scss";
+
 import HeroBanner from "./heroBanner/HeroBanner";
 import Trending from "./trending/Trending";
-import Populer from "./populer/Populer";
+import Popular from "./popular/Popular";
+import TopRated from "./topRated/TopRated";
 
-function Home() {
+const Home = () => {
   return (
     <div className="homePage">
       <HeroBanner />
       <Trending />
-      <Populer />
-      <div className="" style={{ height: "1000px" }}></div>
+      <Popular />
+      <TopRated />
     </div>
   );
-}
+};
 
 export default Home;

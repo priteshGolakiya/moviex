@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import { useRef } from "react";
+import PropTypes from "prop-types"; // Import PropTypes
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
@@ -28,7 +28,6 @@ const Carousel = ({ data, loading, endpoint, title }) => {
       dir === "left"
         ? container.scrollLeft - (container.offsetWidth + 20)
         : container.scrollLeft + (container.offsetWidth + 20);
-        
 
     container.scrollTo({
       left: scrollAmount,
@@ -103,6 +102,14 @@ const Carousel = ({ data, loading, endpoint, title }) => {
       </ContentWrapper>
     </div>
   );
+};
+
+// Add prop type validation
+Carousel.propTypes = {
+  data: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  endpoint: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Carousel;

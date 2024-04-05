@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
@@ -24,7 +25,7 @@ const Header = () => {
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {
-      if (Window.scrollY > lastScrollY && !mobileMenu) {
+      if (window.scrollY > lastScrollY && !mobileMenu) {
         setShow("hide");
       } else {
         setShow("show");
@@ -37,20 +38,10 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", controlNavbar);
-
     return () => {
       window.removeEventListener("scroll", controlNavbar);
     };
   }, [lastScrollY]);
-
-  const openSearch = () => {
-    setMobileMenu(false);
-    setShowSearch(true);
-  };
-  const openMobileMenu = () => {
-    setMobileMenu(true);
-    setShowSearch(false);
-  };
 
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
@@ -59,6 +50,16 @@ const Header = () => {
         setShowSearch(false);
       }, 1000);
     }
+  };
+
+  const openSearch = () => {
+    setMobileMenu(false);
+    setShowSearch(true);
+  };
+
+  const openMobileMenu = () => {
+    setMobileMenu(true);
+    setShowSearch(false);
   };
 
   const navigationHandler = (type) => {
@@ -73,38 +74,25 @@ const Header = () => {
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
-        <div className="logo">
+        <div className="logo" onClick={() => navigate("/")}>
           <img src={logo} alt="" />
         </div>
         <ul className="menuItems">
-          <li
-            className="menuItem"
-            onClick={() => {
-              navigationHandler("movie");
-            }}
-          >
+          <li className="menuItem" onClick={() => navigationHandler("movie")}>
             Movies
           </li>
-          <li
-            className="menuItem"
-            onClick={() => {
-              navigationHandler("tv");
-            }}
-          >
-            TV Showes
+          <li className="menuItem" onClick={() => navigationHandler("tv")}>
+            TV Shows
           </li>
           <li className="menuItem">
             <HiOutlineSearch onClick={openSearch} />
           </li>
         </ul>
+
         <div className="mobileMenuItems">
           <HiOutlineSearch onClick={openSearch} />
           {mobileMenu ? (
-            <VscChromeClose
-              onClick={() => {
-                setMobileMenu(false);
-              }}
-            />
+            <VscChromeClose onClick={() => setMobileMenu(false)} />
           ) : (
             <SlMenu onClick={openMobileMenu} />
           )}
